@@ -1,0 +1,13 @@
+.form__input {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin: 0;
+    padding: 24px 0 48px;
+}
+
+@media screen and (max-width: 560px) {
+    .form__input {
+        padding: 45px 0 45px;
+    }
+}

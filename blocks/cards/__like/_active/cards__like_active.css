@@ -1,0 +1,10 @@
+.cards__like_active {
+    align-self: center;
+    margin: 0;
+    padding: 0 0 0 10px;
+    border: 0;
+    min-width: 22px;
+    height: 19px;
+    background-image: url(../../../../images/like_active.svg);
+    cursor: pointer;
+}

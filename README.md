@@ -17,4 +17,4 @@
 * Управление содержимым элементов
 * Отслеживание и обработка событий
 
-[Ссылка на проект](https://samoshiny.github.io/russian-travel/)
+[Ссылка на проект](https://samoshiny.github.io/mesto/)

@@ -6,7 +6,7 @@
   min-width: 22px;
   height: 19px;
   background-image: url(../../../images/like.svg);
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   transition: .3s opacity;
   cursor: pointer;
 }

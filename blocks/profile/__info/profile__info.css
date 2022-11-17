@@ -9,5 +9,6 @@
   .profile__info {
     column-gap: 12px;
     margin: 26px 0 36px 28px;
+    justify-items: center;
   }
 }

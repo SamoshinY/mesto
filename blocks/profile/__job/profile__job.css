@@ -22,6 +22,6 @@
 
 @media screen and (max-width: 560px) {
   .profile__job {
-    justify-self: center;
+    max-width: 100%;
   }
 }

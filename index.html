@@ -31,23 +31,48 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2022 Самошин Ю.</p>
     </footer>
-    <div class="popup popup_type_form">
+    <div class="popup popup_type_edit">
       <div class="popup__container">
-        <h2 class="popup__heading"></h2>
-        <form class="form" name="form">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <form class="form form_type_edit" name="form-edit">
           <fieldset class="form__input">
             <input
               type="text"
               name="name"
+              placeholder = "Введите имя"
               class="form__item form__item_text_name"
             />
             <input
               type="text"
               name="job"
+              placeholder = "Введите информацию о себе"
               class="form__item form__item_text_job"
             />
           </fieldset>
-          <button type="submit" class="form__save"></button>
+          <button type="submit" class="form__save">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close"></button>
+      </div>
+    </div>
+    <div class="popup popup_type_add">
+      <div class="popup__container">
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="form form_type_add" name="form-add">
+          <fieldset class="form__input">
+            <input
+              type="text"
+              name="name"
+              placeholder = "Название"
+              class="form__item form__item_type_name"
+            />
+            <input
+              type="text"
+              name="job"
+              placeholder = "Ссылка на картинку"
+              class="form__item form__item_type_link"
+            />
+          </fieldset>
+          <button type="submit" class="form__save">Создать</button>
         </form>
         <button type="button" class="popup__close"></button>
       </div>

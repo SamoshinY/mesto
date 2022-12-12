@@ -6,3 +6,7 @@
   aspect-ratio: 1/1;
   box-sizing: border-box;
 }
+
+.cards__image:hover {
+  cursor: pointer;
+}

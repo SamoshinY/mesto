@@ -41,13 +41,41 @@ const popupCaption = popupImageElement.querySelector(".popup__caption");
 
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
+  document.addEventListener("keyup", closePopupByEsc);
+  popup.addEventListener("click", closePopupByOverlay);
 };
 
 // Закрытие попапов
 
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keyup", closePopupByEsc);
+  popup.removeEventListener("click", closePopupByOverlay);
 };
+
+// Закрытие  по Esc
+
+const closePopupByEsc = (evt) => {
+  if (evt.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+};
+
+// Закрытие по оверлею
+
+const closePopupByOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target.closest(".popup"));
+  }
+};
+
+// Лайк карточки
+
+const likeCard = (evt) => evt.target.classList.toggle("cards__like_active");
+
+// Удаление карточки
+
+const deleteCard = (evt) => evt.target.closest(".cards__card").remove();
 
 // Создание карточки
 
@@ -57,14 +85,9 @@ const createCard = (item) => {
     .cloneNode(true);
   const itemName = cardElement.querySelector(".cards__title");
   const itemLink = cardElement.querySelector(".cards__image");
-
-  const likeCard = (evt) => evt.target.classList.toggle("cards__like_active");
-  const deleteCard = (evt) => evt.target.closest(".cards__card").remove();
-
   itemName.textContent = item.name;
   itemLink.src = item.link;
   itemLink.alt = item.name;
-
   cardElement.querySelector(".cards__like").addEventListener("click", likeCard);
   cardElement
     .querySelector(".cards__delete")
@@ -94,8 +117,7 @@ const addCard = (container) => {
     name: popupTextInputPlaceNameElement.value,
     link: popupTextInputLinkElement.value,
   };
-  const newElement = createCard(newItem);
-  container.prepend(newElement);
+  container.prepend(createCard(newItem));
 };
 
 // Редактирование профиля

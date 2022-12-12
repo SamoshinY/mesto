@@ -105,13 +105,18 @@ const createCard = (item) => {
 
 const addCard = (container, item) => container.prepend(createCard(item));
 
-// Создание новой карточки из полей инпута
+// Создание заготовки из полей инпута
+
+const createItem = (item) => {
+  item.name = popupTextInputPlaceNameElement.value;
+  item.link = popupTextInputLinkElement.value;
+}
+
+// Создание и добавление на страницу новой карточки
 
 const addNewCard = (container) => {
   const item = {};
-  item.name = popupTextInputPlaceNameElement.value;
-  item.link = popupTextInputLinkElement.value;
-  createCard(item);
+  createItem(item);
   addCard(container, item);
 };
 
@@ -122,7 +127,6 @@ const renderCards = (arr, container) => {
     addCard(container, item);
   });
 };
-
 
 // Редактирование профиля
 

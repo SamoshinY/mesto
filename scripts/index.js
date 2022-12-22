@@ -21,10 +21,10 @@ import { FormValidator } from "./formValidator.js";
 
 // Открытие попапов
 
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
   popup.classList.add("popup_opened");
   document.addEventListener("keyup", closePopupByEsc);
-  popup.addEventListener("mousedown", closePopupByOverlay);
+  popup.addEventListener("mousedown", closePopupByOverlayAndCloseButton);
 };
 
 // Закрытие попапов
@@ -32,7 +32,7 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keyup", closePopupByEsc);
-  popup.removeEventListener("mousedown", closePopupByOverlay);
+  popup.removeEventListener("mousedown", closePopupByOverlayAndCloseButton);
 };
 
 // Закрытие  по Esc
@@ -43,19 +43,30 @@ const closePopupByEsc = (evt) => {
   }
 };
 
-// Закрытие по оверлею
+// Закрытие по оверлею или кнопке с крестиком
 
-const closePopupByOverlay = (evt) => {
-  if (evt.target === evt.currentTarget) {
+const closePopupByOverlayAndCloseButton = (evt) => {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("popup__close")
+  ) {
     closePopup(evt.target.closest(".popup"));
   }
+};
+
+// Создание карточки
+
+const createCard = (item) => {
+  const card = new Card(item, ".cards__card");
+  return card;
 };
 
 // Добавление карточки в контейнер на странице
 
 const addCard = (container, item) => {
-  const card = new Card(item, ".cards__card");
-  container.prepend(card.generateCard());
+  const card = createCard(item);
+  const cardElement = card.generateCard();
+  container.prepend(cardElement);
 };
 
 // Создание заготовки из полей инпута
@@ -114,23 +125,6 @@ profileEditButtonElement.addEventListener("click", () => {
 addCardButtonElement.addEventListener("click", () => {
   openPopup(popupAddElement);
 });
-
-// Вариант 1 один слушатель, цикл.
-
-const buttonsClosePopup = document.querySelectorAll(".popup__close"); //
-for (const button of buttonsClosePopup) {
-  button.addEventListener("click", (evt) => {
-    closePopup(evt.target.closest(".popup"));
-  });
-}
-
-// Вариант 2 один слушатель, делегирование событий.
-
-// document.addEventListener('click', evt => {
-//       if (evt.target.className === "popup__close") {
-//          closePopup(evt.target.closest(".popup"));
-//       }
-//     });
 
 formEditElement.addEventListener("submit", editFormSubmitHandler);
 formAddElement.addEventListener("submit", addFormSubmitHandler);

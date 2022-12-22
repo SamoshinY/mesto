@@ -40,7 +40,7 @@
               id="name-item"
               type="text"
               name="name"
-              placeholder = "Введите имя"
+              placeholder="Введите имя"
               class="form__item form__item_text_name"
               required
               minlength="2"
@@ -51,7 +51,7 @@
               id="job-item"
               type="text"
               name="job"
-              placeholder = "Введите информацию о себе"
+              placeholder="Введите информацию о себе"
               class="form__item form__item_text_job"
               required
               minlength="2"
@@ -73,7 +73,7 @@
               id="place-item"
               type="text"
               name="place"
-              placeholder = "Название"
+              placeholder="Название"
               class="form__item form__item_type_name"
               required
               minlength="2"
@@ -84,27 +84,29 @@
               id="link-item"
               type="url"
               name="link"
-              placeholder = "Ссылка на картинку"
+              placeholder="Ссылка на картинку"
               class="form__item form__item_type_link"
               required
             />
             <span class="link-item-error form__item-error"></span>
           </fieldset>
-          <button type="submit" class="form__save form__save_disabled" disabled>Создать</button>
+          <button type="submit" class="form__save form__save_disabled" disabled>
+            Создать
+          </button>
         </form>
         <button type="button" class="popup__close"></button>
       </div>
     </div>
     <div class="popup popup_type_image popup_dark">
       <div class="popup__image-container">
-          <img class="popup__image" src="#" alt="">
-          <p class="popup__caption"></p>
-          <button type="button" class="popup__close"></button>
+        <img class="popup__image" src="#" alt="" />
+        <p class="popup__caption"></p>
+        <button type="button" class="popup__close"></button>
       </div>
     </div>
     <template id="card-template">
       <article class="cards__card">
-        <img class="cards__image" src="#">
+        <img class="cards__image" src="#" />
         <div class="cards__wrap">
           <h2 class="cards__title"></h2>
           <button type="button" class="cards__like"></button>
@@ -113,6 +115,5 @@
       </article>
     </template>
     <script src="./scripts/index.js" type="module"></script>
-    <script src="./scripts/validation.js"></script>
   </body>
 </html>

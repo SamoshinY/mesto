@@ -58,15 +58,13 @@ const closePopupByOverlayAndCloseButton = (evt) => {
 
 const createCard = (item) => {
   const card = new Card(item, ".cards__card");
-  return card;
+  return card.generateCard();
 };
 
 // Добавление карточки в контейнер на странице
 
 const addCard = (container, item) => {
-  const card = createCard(item);
-  const cardElement = card.generateCard();
-  container.prepend(cardElement);
+  container.prepend(createCard(item));
 };
 
 // Создание заготовки из полей инпута

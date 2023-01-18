@@ -1,39 +1,24 @@
 import {
   initialCards,
   configFormValidation,
-  popupEditElement,
   formEditElement,
+  formAddElement,
   popupTextInputNameElement,
   popupTextInputJobElement,
-  popupAddElement,
-  formAddElement,
-  popupTextInputPlaceNameElement,
-  popupTextInputLinkElement,
-  profileElement,
   profileEditButtonElement,
-  profileTextNameElement,
-  profileTextJobElement,
-  cardsContainer,
   addCardButtonElement,
-  popupImageElement,
-  popupImage,
-  popupCaption,
 } from "../utils/constants.js";
 import '../pages/index.css';
-import { Card } from "../components/card.js";
-import { FormValidator } from "../components/formValidator.js";
-import { Section } from "../components/section.js";
-import { PopupWithImage } from "../components/popupWithImage.js";
-import { PopupWithForm } from "../components/popupWithForm.js";
-import { UserInfo } from "../components/userInfo.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 // Экземпляр для модалки с картинкой
 
-const imageZoom = new PopupWithImage(
-  popupImageElement,
-  popupImage,
-  popupCaption
-);
+const imageZoom = new PopupWithImage('.popup_type_image');
 imageZoom.setEventListeners();
 
 // Рендер карточек
@@ -46,31 +31,29 @@ const renderCard = (item) => {
   const cardElement = card.generateCard();
   section.addItem(cardElement);
 };
-
-const section = new Section([initialCards, renderCard], cardsContainer);
+const section = new Section([initialCards, renderCard], '.cards');
 section.renderElements();
 
 // Редактирование профиля
 
-const userInfo = new UserInfo(profileTextNameElement, profileTextJobElement);
-
-const popupEdit = new PopupWithForm(popupEditElement, () => {
-  userInfo.setUserInfo(popupTextInputNameElement, popupTextInputJobElement);
+const userInfo = new UserInfo('.profile__name', '.profile__job');
+const popupEdit = new PopupWithForm('.popup_type_edit', () => {
+  userInfo.setUserInfo(popupEdit.getInputValues());
 });
 popupEdit.setEventListeners();
 
 profileEditButtonElement.addEventListener("click", () => {
-  popupTextInputNameElement.value = userInfo.getUserInfo().name;
-  popupTextInputJobElement.value = userInfo.getUserInfo().info;
+  const { name, info } = userInfo.getUserInfo();
+  popupTextInputNameElement.value = name;
+  popupTextInputJobElement.value = info;
   popupEdit.open();
 });
 
 // Добавление карточки
 
-const popupAdd = new PopupWithForm(popupAddElement, (item) => {
-  item.name = popupTextInputPlaceNameElement.value;
-  item.link = popupTextInputLinkElement.value;
-  renderCard(item);
+const popupAdd = new PopupWithForm('.popup_type_add', () => {
+  const inputValues = popupAdd.getInputValues();
+  renderCard(inputValues);
 });
 popupAdd.setEventListeners();
 

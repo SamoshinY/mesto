@@ -19,7 +19,7 @@ import {
   popupImage,
   popupCaption,
 } from "../utils/constants.js";
-
+import '../pages/index.css';
 import { Card } from "../components/card.js";
 import { FormValidator } from "../components/formValidator.js";
 import { Section } from "../components/section.js";
@@ -34,6 +34,7 @@ const imageZoom = new PopupWithImage(
   popupImage,
   popupCaption
 );
+imageZoom.setEventListeners();
 
 // Рендер карточек
 
@@ -56,10 +57,11 @@ const userInfo = new UserInfo(profileTextNameElement, profileTextJobElement);
 const popupEdit = new PopupWithForm(popupEditElement, () => {
   userInfo.setUserInfo(popupTextInputNameElement, popupTextInputJobElement);
 });
+popupEdit.setEventListeners();
 
 profileEditButtonElement.addEventListener("click", () => {
   popupTextInputNameElement.value = userInfo.getUserInfo().name;
-  popupTextInputJobElement.value = userInfo.getUserInfo().job;
+  popupTextInputJobElement.value = userInfo.getUserInfo().info;
   popupEdit.open();
 });
 
@@ -70,6 +72,7 @@ const popupAdd = new PopupWithForm(popupAddElement, (item) => {
   item.link = popupTextInputLinkElement.value;
   renderCard(item);
 });
+popupAdd.setEventListeners();
 
 addCardButtonElement.addEventListener("click", () => {
   popupAdd.open();

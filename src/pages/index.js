@@ -61,7 +61,7 @@ const renderCard = (item) => {
     popupConfirm.open(() => {
       api
         .deleteCard(id)
-        .then((res) => {
+        .then(() => {
           card.deleteCardInFrontOfMe();
         })
         .catch((err) => {
@@ -72,10 +72,15 @@ const renderCard = (item) => {
 
   const handleLikeClick = (id, selector, counterElement) => {
     !selector
-      ? api.likeSetting(id).then((data) => {
-          counterElement.textContent = data.likes.length;
-          card.toggleLike();
-        })
+      ? api
+          .likeSetting(id)
+          .then((data) => {
+            counterElement.textContent = data.likes.length;
+            card.toggleLike();
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          })
       : api
           .likeRemoving(id)
           .then((data) => {
@@ -133,7 +138,6 @@ profileEditButtonElement.addEventListener("click", () => {
 // Добавление карточки
 
 const popupAdd = new PopupWithForm(".popup_type_add", () => {
-  const defaultText = addCardButtonElement.textContent;
   popupAdd.setButtonText("Сохранение...");
   const inputValues = popupAdd.getInputValues();
   api

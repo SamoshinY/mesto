@@ -1,5 +1,4 @@
 export {
-  initialCards,
   configFormValidation,
   formEditElement,
   popupTextInputNameElement,
@@ -7,34 +6,9 @@ export {
   formAddElement,
   profileEditButtonElement,
   addCardButtonElement,
+  avatarImage,
+  formAvatarElement
 };
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
 
 const configFormValidation = {
   formSelector: ".form",
@@ -56,3 +30,5 @@ const formAddElement = document.querySelector(".form_type_add");
 const profileElement = document.querySelector(".profile");
 const profileEditButtonElement = profileElement.querySelector(".profile__edit");
 const addCardButtonElement = profileElement.querySelector(".profile__add");
+const formAvatarElement = document.querySelector(".form_type_change-avatar");
+const avatarImage = document.querySelector(".profile__image");

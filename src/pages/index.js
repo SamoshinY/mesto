@@ -7,7 +7,7 @@ import {
   profileEditButtonElement,
   addCardButtonElement,
   avatarImage,
-  formAvatarElement
+  formAvatarElement,
 } from "../utils/constants.js";
 import "../pages/index.css";
 import { Card } from "../components/Card.js";
@@ -29,17 +29,16 @@ const api = new Api({
 
 let myId;
 
-Promise.all([api.getInfoMe(), api.getInitialCards()]).then(
-  ([userData, cardsData]) => {
+Promise.all([api.getInfoMe(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
     myId = userData._id;
     userInfo.setUserInfo(userData);
     userInfo.setAvatar(userData);
     section.renderElements(cardsData.reverse());
-  }
-)
-.catch((err) => {
-  console.log(`Ошибка: ${err}`);
-});
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  });
 
 // Экземпляр для модалки с картинкой
 
@@ -60,12 +59,14 @@ const renderCard = (item) => {
 
   const handleDeleteClick = (id) => {
     popupConfirm.open(() => {
-      api.deleteCard(id).then((res) => {
-        card.deleteCardInFrontOfMe();
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
+      api
+        .deleteCard(id)
+        .then((res) => {
+          card.deleteCardInFrontOfMe();
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
     });
   };
 
@@ -75,13 +76,15 @@ const renderCard = (item) => {
           counterElement.textContent = data.likes.length;
           card.toggleLike();
         })
-      : api.likeRemoving(id).then((data) => {
-          counterElement.textContent = data.likes.length;
-          card.toggleLike();
-        })
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
+      : api
+          .likeRemoving(id)
+          .then((data) => {
+            counterElement.textContent = data.likes.length;
+            card.toggleLike();
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
   };
 
   const card = new Card(

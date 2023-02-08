@@ -32,7 +32,7 @@ export class FormValidator {
     return inputElement.validity.valid;
   }
 
-  _setEventListeners(inputElement) {
+  _setEventListeners() {
     const inputList = [
       ...this._formElement.querySelectorAll(this._inputSelector),
     ];

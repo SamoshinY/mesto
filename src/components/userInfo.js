@@ -10,11 +10,11 @@ export class UserInfo {
   };
 
   setUserInfo(newInfo) {
-    this._name.textContent = newInfo.name;
-    this._info.textContent = newInfo.about;
+    if(newInfo.name) {this._name.textContent = newInfo.name};
+    if(newInfo.about) {this._info.textContent = newInfo.about};
   }
 
   setAvatar(newAvatar) {
-    this._avatar.src = newAvatar.avatar;
+    if(newAvatar.avatar) {this._avatar.src = newAvatar.avatar};
   }
 }

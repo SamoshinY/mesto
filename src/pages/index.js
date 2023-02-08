@@ -63,6 +63,7 @@ const renderCard = (item) => {
         .deleteCard(id)
         .then(() => {
           card.deleteCardInFrontOfMe();
+          popupConfirm.close();
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
@@ -119,12 +120,12 @@ const popupEdit = new PopupWithForm(".popup_type_edit", () => {
     .editUserProfile(popupEdit.getInputValues())
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupEdit.close();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     })
     .finally(popupEdit.setButtonText("Сохранить"));
-  userInfo.setUserInfo(popupEdit.getInputValues());
 });
 popupEdit.setEventListeners();
 
@@ -139,11 +140,11 @@ profileEditButtonElement.addEventListener("click", () => {
 
 const popupAdd = new PopupWithForm(".popup_type_add", () => {
   popupAdd.setButtonText("Сохранение...");
-  const inputValues = popupAdd.getInputValues();
   api
-    .addNewCard(inputValues)
+    .addNewCard(popupAdd.getInputValues())
     .then((data) => {
       renderCard(data);
+      popupAdd.close();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
@@ -168,6 +169,7 @@ const popupAvatar = new PopupWithForm(".popup_type_change-avatar", () => {
     .changeUserAvatar(inputValues)
     .then((data) => {
       userInfo.setAvatar(data);
+      popupAvatar.close();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);

@@ -22,6 +22,10 @@ export class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
   }
 
+  resetInputErrors() {
+    this._inputList.forEach(input => {this._hideError(input)});
+  }
+
   _switchErrorVisibility(inputElement) {
     !this._checkValidity(inputElement)
       ? this._showError(inputElement)
@@ -33,13 +37,13 @@ export class FormValidator {
   }
 
   _setEventListeners() {
-    const inputList = [
+    this._inputList = [
       ...this._formElement.querySelectorAll(this._inputSelector),
     ];
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._switchErrorVisibility(inputElement);
-        const isFormValid = inputList.every((inputElement) =>
+        const isFormValid = this._inputList.every((inputElement) =>
           this._checkValidity(inputElement)
         );
         this._setSubmitButtonState(isFormValid);

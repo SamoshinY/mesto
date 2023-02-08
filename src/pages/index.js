@@ -114,10 +114,10 @@ const userInfo = new UserInfo(
   ".profile__job",
   ".profile__image"
 );
-const popupEdit = new PopupWithForm(".popup_type_edit", () => {
+const popupEdit = new PopupWithForm(".popup_type_edit", (values) => {
   popupEdit.setButtonText("Сохранение...");
   api
-    .editUserProfile(popupEdit.getInputValues())
+    .editUserProfile(values)
     .then((data) => {
       userInfo.setUserInfo(data);
       popupEdit.close();
@@ -134,14 +134,15 @@ profileEditButtonElement.addEventListener("click", () => {
   popupTextInputNameElement.value = name;
   popupTextInputJobElement.value = about;
   popupEdit.open();
+  formEditValidator.resetInputErrors();
 });
 
 // Добавление карточки
 
-const popupAdd = new PopupWithForm(".popup_type_add", () => {
+const popupAdd = new PopupWithForm(".popup_type_add", (values) => {
   popupAdd.setButtonText("Сохранение...");
   api
-    .addNewCard(popupAdd.getInputValues())
+    .addNewCard(values)
     .then((data) => {
       renderCard(data);
       popupAdd.close();
@@ -158,15 +159,15 @@ popupAdd.setEventListeners();
 
 addCardButtonElement.addEventListener("click", () => {
   popupAdd.open();
+  formAddValidator.resetInputErrors();
 });
 
 // Замена аватара
 
-const popupAvatar = new PopupWithForm(".popup_type_change-avatar", () => {
+const popupAvatar = new PopupWithForm(".popup_type_change-avatar", (values) => {
   popupAvatar.setButtonText("Сохранение...");
-  const inputValues = popupAvatar.getInputValues();
   api
-    .changeUserAvatar(inputValues)
+    .changeUserAvatar(values)
     .then((data) => {
       userInfo.setAvatar(data);
       popupAvatar.close();
@@ -180,6 +181,7 @@ popupAvatar.setEventListeners();
 
 avatarImage.addEventListener("click", () => {
   popupAvatar.open();
+  formAvatarValidator.resetInputErrors();
 });
 
 // Вызов валидации

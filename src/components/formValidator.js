@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(config, formElement) {
     this._formElement = formElement;
     this._inputSelector = config.inputSelector;
@@ -23,7 +23,7 @@ export class FormValidator {
   }
 
   resetInputErrors() {
-    this._inputList.forEach(input => {this._hideError(input)});
+    this._inputList.forEach((input) => this._hideError(input));
   }
 
   _switchErrorVisibility(inputElement) {

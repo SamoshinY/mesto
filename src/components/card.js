@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(data) {
     this._data = data;
     this._userId = data.userId;
@@ -31,20 +31,19 @@ export class Card {
     this._element.querySelector(".cards__title").textContent = this._name;
     this._likeQuantity = this._element.querySelector(".cards__likes-counter");
     this._likeQuantity.textContent = this._likesCounter;
-    this._delete = this._element.querySelector('.cards__delete');
+    this._delete = this._element.querySelector(".cards__delete");
 
     if (this._ownerId !== this._userId) {
-      this._delete.classList.add('cards__delete_hidden')
+      this._delete.classList.add("cards__delete_hidden");
     }
 
     this.isLike = this._likes.some((like) => like._id === this._userId);
     if (this.isLike) {
-      this.toggleLike()
+      this.toggleLike();
       this.isLike = !this.isLike;
     }
 
     this._setEventListeners();
-
     return this._element;
   }
 
@@ -60,15 +59,20 @@ export class Card {
 
   _setEventListeners() {
     this._like.addEventListener("click", () => {
-      this._handleLikeClick(this);
+      this._handleLikeClick(this)
+        .then((data) => {
+          this._likeQuantity.textContent = data.likes.length;
+          this.toggleLike();
+        })
+        .catch((err) => {
+          console.error(`Ошибка: ${err}`);
+        });
     });
     this._element
       .querySelector(".cards__delete")
       .addEventListener("click", () => {
-        this._handleDeleteClick(this)}
-      );
-    this._image.addEventListener("click", () =>
-      this._handleImageClick(this)
-    );
+        this._handleDeleteClick(this);
+      });
+    this._image.addEventListener("click", () => this._handleImageClick(this));
   }
 }

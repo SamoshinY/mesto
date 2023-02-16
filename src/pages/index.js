@@ -55,10 +55,9 @@ const handleDeleteClick = (card) => {
 };
 
 const handleLikeClick = (card) => {
-  const likeSetOrRemove = !card.isLike
+  return !card.isLike
     ? api.likeSetting(card._id)
     : api.likeRemoving(card._id);
-  return likeSetOrRemove;
 };
 
 // Валидация

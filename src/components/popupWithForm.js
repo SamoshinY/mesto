@@ -15,11 +15,10 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    this._inputValues = {};
-    this._inputList.forEach(
-      (input) => (this._inputValues[input.name] = input.value)
-    );
-    return this._inputValues;
+    return this._inputList.reduce((inputValues, input) => {
+      inputValues[input.name] = input.value;
+      return inputValues;
+    }, {});
   }
 
   setEventListeners() {

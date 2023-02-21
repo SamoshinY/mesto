@@ -4,19 +4,15 @@ export default class Api {
     this._headers = options.headers;
   }
 
-  _checkResponseStatus() {
-    return (res) =>
-      res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-  }
+  _checkResponseStatus = () => (res) =>
+    res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 
-  getInfoMe() {
-    return fetch(`${this._baseUrl}/users/me`, {
+  getInfoMe = () =>
+    fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._checkResponseStatus());
-  }
 
-  editUserProfile(info) {
-    return fetch(`${this._baseUrl}/users/me`, {
+  editUserProfile = (info) => fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
@@ -24,16 +20,12 @@ export default class Api {
         about: info.job,
       }),
     }).then(this._checkResponseStatus());
-  }
 
-  getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+  getInitialCards = () => fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._checkResponseStatus());
-  }
 
-  addNewCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+  addNewCard = (data) => fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify({
@@ -41,36 +33,27 @@ export default class Api {
         link: data.link,
       }),
     }).then(this._checkResponseStatus());
-  }
 
-  deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+  deleteCard = (id) => fetch(`${this._baseUrl}/cards/${id}`, {
       headers: this._headers,
       method: "DELETE",
     }).then(this._checkResponseStatus());
-  }
 
-  likeSetting(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  likeSetting = (id) => fetch(`${this._baseUrl}/cards/${id}/likes`, {
       headers: this._headers,
       method: "PUT",
     }).then(this._checkResponseStatus());
-  }
 
-  likeRemoving(id) {
-    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+  likeRemoving = (id) => fetch(`${this._baseUrl}/cards/${id}/likes`, {
       headers: this._headers,
       method: "DELETE",
     }).then(this._checkResponseStatus());
-  }
 
-  changeUserAvatar(data) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+  changeUserAvatar = (data) => fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
         avatar: data.avatar,
       }),
     }).then(this._checkResponseStatus());
-  }
 }

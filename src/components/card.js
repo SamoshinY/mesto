@@ -1,10 +1,10 @@
 export default class Card {
   constructor(data) {
-    this._data = data;
+    this.data = data;
     this._userId = data.userId;
     this._name = data.name;
     this._link = data.link;
-    this._id = data._id;
+    this.id = data._id;
     this._ownerId = data.owner._id;
     this._likes = data.likes;
     this._likesCounter = data.likes.length;
@@ -58,21 +58,17 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._like.addEventListener("click", () => {
+    this._like.addEventListener("click", () =>
       this._handleLikeClick(this)
         .then((data) => {
           this._likeQuantity.textContent = data.likes.length;
           this.toggleLike();
         })
-        .catch((err) => {
-          console.error(`Ошибка: ${err}`);
-        });
-    });
+        .catch((err) => console.error(err))
+    );
     this._element
       .querySelector(".cards__delete")
-      .addEventListener("click", () => {
-        this._handleDeleteClick(this);
-      });
+      .addEventListener("click", () => this._handleDeleteClick(this));
     this._image.addEventListener("click", () => this._handleImageClick(this));
   }
 }
